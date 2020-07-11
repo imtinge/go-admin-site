@@ -184,16 +184,13 @@ package apis
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-admin/models"
+	"go-admin/tools/app"
 	"net/http"
 )
 
 func GetArticleList(c *gin.Context) {
-	
-	var res models.Response
-	res.Data = "hello world ！"
-
-	c.JSON(http.StatusOK, res.ReturnOK())
+	data := "hello world ！"
+        app.OK(c, data, "")
 }
 ```
 
@@ -220,15 +217,14 @@ go-admin
     sqlite3.db
 ```
 
-在 `go-admin/router/router.go` 中，输入以下代码：
+在 `go-admin/router/router.go` 中，修改examplesNoCheckRoleRouter：
 
 ```go
-func InitRouter() *gin.Engine {
-
-    r := gin.New()
-
-    r.GET("/articleList",apis.GetArticleList)
-
+func examplesNoCheckRoleRouter(r *gin.Engine) {
+  
+    //v1 := r.Group("/api/v1")
+    //v1.GET("/examples/list", examples.apis)
+    r.GET("/articleList", apis.GetArticleList)
 }
 ```
 
